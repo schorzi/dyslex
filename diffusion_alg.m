@@ -25,10 +25,6 @@ figure; scatter(mP2(:,1), mP2(:,2), 100, mW(1,:)', 'Fill');       colorbar;
 figure; scatter3(mP3(:,1), mP3(:,2), mP3(:,3), 100, vY', 'Fill'); colorbar;
 
 
-
-
-
-
 figure; imagesc(mW); colorbar;
 figure; imagesc(mK); colorbar;
 
