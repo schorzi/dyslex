@@ -1,16 +1,21 @@
-function [ mat_out,minVecLength,maxVecLength ] = split2vecs(vec,startInd,endInd)
+function [ sDat ] = split2vecs(vec,startInd,endInd)
 
-deltas         = (endInd - startInd)+1;
-maxVecLength   = max(deltas);
-minVecLength = min(deltas);
-tmp            = zeros(maxVecLength,length(startInd));
-
+maxLength     = max(endInd - startInd);
+tmp           = zeros(maxLength,length(startInd));
+vecLength     = zeros(length(startInd),1);
 for i=1:length(startInd)
-        tmp(1:deltas(i),i)     = vec(startInd(i):endInd(i));
-        tmp(deltas(i)+1:end,i) = nan;
+        vTmp                   = vec(startInd(i):endInd(i));
+        vTmp(isnan(vTmp))      = [];
+        vecLength(i)           = length(vTmp);
+        tmp(1:vecLength(i),i)  = vTmp;
+        tmp(vecLength(i)+1:end,i) = nan;
 end
 
-mat_out = tmp;
+sDat.maxVecLength  = max(vecLength);
+sDat.minVecLength  = min(vecLength);
+sDat.meanVecLength = mean(vecLength);
+sDat.medVecLenght  = median(vecLength);
+sDat.M = tmp;
 
 end
 
